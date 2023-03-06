@@ -56,18 +56,19 @@ public class PagamentoService {
         return null;
     }
 
-    private Pagamento atualizaDados(Pagamento dados, Optional<Pagamento> atualizar) {
+    private Pagamento atualizaDados(Pagamento dados, Optional<Pagamento> retornoBanco) {
+        Pagamento atualizar = retornoBanco.get();
         Pagamento retorno = new Pagamento();
 
-        retorno.setId(dados.getId() != null ? dados.getId() : atualizar.get().getId());
-        retorno.setValor(dados.getValor() != null ? dados.getValor() : atualizar.get().getValor());
-        retorno.setNome(dados.getNome() != null ? dados.getNome() : atualizar.get().getNome());
-        retorno.setNumero(dados.getNumero() != null ? dados.getNumero() : atualizar.get().getNumero());
-        retorno.setExpiracao(dados.getExpiracao() != null ? dados.getExpiracao() : atualizar.get().getExpiracao());
-        retorno.setCodigo(dados.getCodigo() != null ? dados.getCodigo() : atualizar.get().getCodigo());
-        retorno.setStatus(dados.getStatus() != null ? dados.getStatus() : atualizar.get().getStatus());
-        retorno.setPedidoId(dados.getPedidoId() != null ? dados.getPedidoId() : atualizar.get().getPedidoId());
-        retorno.setFormaDePagamentoId(dados.getFormaDePagamentoId() != null ? dados.getFormaDePagamentoId() : atualizar.get().getFormaDePagamentoId());
+        retorno.setId(dados.getId() != null ? dados.getId() : atualizar.getId());
+        retorno.setValor(dados.getValor() != null ? dados.getValor() : atualizar.getValor());
+        retorno.setNome(dados.getNome() != null ? dados.getNome() : atualizar.getNome());
+        retorno.setNumero(dados.getNumero() != null ? dados.getNumero() : atualizar.getNumero());
+        retorno.setExpiracao(dados.getExpiracao() != null ? dados.getExpiracao() : atualizar.getExpiracao());
+        retorno.setCodigo(dados.getCodigo() != null ? dados.getCodigo() : atualizar.getCodigo());
+        retorno.setStatus(dados.getStatus() != null ? dados.getStatus() : atualizar.getStatus());
+        retorno.setPedidoId(dados.getPedidoId() != null ? dados.getPedidoId() : atualizar.getPedidoId());
+        retorno.setFormaDePagamentoId(dados.getFormaDePagamentoId() != null ? dados.getFormaDePagamentoId() : atualizar.getFormaDePagamentoId());
 
         return retorno;
     }
