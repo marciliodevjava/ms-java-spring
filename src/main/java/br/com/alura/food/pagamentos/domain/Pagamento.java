@@ -43,8 +43,10 @@ public class Pagamento {
     @Enumerated(EnumType.STRING)
     private Status status;
     @NotNull
+    @Column(name = "pedido_id")
     private Long pedidoId;
     @NotNull
+    @Column(name = "forma_de_pagamento_id")
     private Long formaDePagamentoId;
 
 
