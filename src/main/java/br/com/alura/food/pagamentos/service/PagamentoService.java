@@ -58,7 +58,6 @@ public class PagamentoService {
 
     private Pagamento atualizaDados(Pagamento dados, Optional<Pagamento> retornoBanco) {
 
-        if (retornoBanco.isPresent()) {
             Pagamento atualizar = retornoBanco.get();
             Pagamento retorno = new Pagamento();
 
@@ -74,8 +73,5 @@ public class PagamentoService {
             retorno.setFormaDePagamentoId(dados.getFormaDePagamentoId() != null ? dados.getFormaDePagamentoId() : atualizar.getFormaDePagamentoId());
 
             return retorno;
-        }
-
-        return new Pagamento();
     }
 }
