@@ -47,7 +47,7 @@ public class PagamentoService {
     public PagamentoDto atualizarPagamento(Long id, PagamentoDto dto) {
         Pagamento pagamento = modelMapper.map(dto, Pagamento.class);
         Optional<Pagamento> buscarBanco = pagamentoRepository.findById(id);
-        if (buscarBanco.isPresent()){
+        if (buscarBanco.isPresent()) {
             Pagamento retorno = pagamentoRepository.save(this.atualizaDados(pagamento, buscarBanco));
 
             return modelMapper.map(retorno, PagamentoDto.class);
@@ -57,19 +57,25 @@ public class PagamentoService {
     }
 
     private Pagamento atualizaDados(Pagamento dados, Optional<Pagamento> retornoBanco) {
-        Pagamento atualizar = retornoBanco.get();
-        Pagamento retorno = new Pagamento();
 
-        retorno.setId(dados.getId() != null ? dados.getId() : atualizar.getId());
-        retorno.setValor(dados.getValor() != null ? dados.getValor() : atualizar.getValor());
-        retorno.setNome(dados.getNome() != null ? dados.getNome() : atualizar.getNome());
-        retorno.setNumero(dados.getNumero() != null ? dados.getNumero() : atualizar.getNumero());
-        retorno.setExpiracao(dados.getExpiracao() != null ? dados.getExpiracao() : atualizar.getExpiracao());
-        retorno.setCodigo(dados.getCodigo() != null ? dados.getCodigo() : atualizar.getCodigo());
-        retorno.setStatus(dados.getStatus() != null ? dados.getStatus() : atualizar.getStatus());
-        retorno.setPedidoId(dados.getPedidoId() != null ? dados.getPedidoId() : atualizar.getPedidoId());
-        retorno.setFormaDePagamentoId(dados.getFormaDePagamentoId() != null ? dados.getFormaDePagamentoId() : atualizar.getFormaDePagamentoId());
+        if (retornoBanco.isPresent()) {
+            Pagamento atualizar = retornoBanco.get();
+            Pagamento retorno = new Pagamento();
 
-        return retorno;
+
+            retorno.setId(dados.getId() != null ? dados.getId() : atualizar.getId());
+            retorno.setValor(dados.getValor() != null ? dados.getValor() : atualizar.getValor());
+            retorno.setNome(dados.getNome() != null ? dados.getNome() : atualizar.getNome());
+            retorno.setNumero(dados.getNumero() != null ? dados.getNumero() : atualizar.getNumero());
+            retorno.setExpiracao(dados.getExpiracao() != null ? dados.getExpiracao() : atualizar.getExpiracao());
+            retorno.setCodigo(dados.getCodigo() != null ? dados.getCodigo() : atualizar.getCodigo());
+            retorno.setStatus(dados.getStatus() != null ? dados.getStatus() : atualizar.getStatus());
+            retorno.setPedidoId(dados.getPedidoId() != null ? dados.getPedidoId() : atualizar.getPedidoId());
+            retorno.setFormaDePagamentoId(dados.getFormaDePagamentoId() != null ? dados.getFormaDePagamentoId() : atualizar.getFormaDePagamentoId());
+
+            return retorno;
+        }
+
+        return new Pagamento();
     }
 }
