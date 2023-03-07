@@ -23,7 +23,7 @@ public class PagamentoResource {
     private PagamentoService pagamentoService;
 
     @GetMapping
-    public ResponseEntity<Page<PagamentoDto>> obterTodos(@PageableDefault(size = 10, page = 0)Pageable paginacao){
+    public ResponseEntity<Page<PagamentoDto>> obterTodos(@PageableDefault(size = 10, page = 0, sort = "nome")Pageable paginacao){
         return ResponseEntity.ok(pagamentoService.obterTodos(paginacao));
     }
 
