@@ -1,11 +1,8 @@
 package br.com.alura.food.pagamentos.config;
 
-import feign.Feign;
 import org.modelmapper.ModelMapper;
-import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class Configuracao {

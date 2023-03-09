@@ -3,14 +3,11 @@ package br.com.alura.food.pagamentos.service;
 import br.com.alura.food.pagamentos.domain.Pagamento;
 import br.com.alura.food.pagamentos.domain.enuns.Status;
 import br.com.alura.food.pagamentos.dto.PagamentoDto;
-import br.com.alura.food.pagamentos.http.PedidoClient;
+import br.com.alura.food.pagamentos.http.PedidoClients;
 import br.com.alura.food.pagamentos.repository.PagamentoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClientsConfiguration;
-import org.springframework.cloud.openfeign.FeignContext;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,8 +17,6 @@ import java.util.Optional;
 @Service
 public class PagamentoService {
 
-    @Autowired
-    private PedidoClient pedidoClient;
 
     @Autowired
     private PagamentoRepository pagamentoRepository;
@@ -29,7 +24,8 @@ public class PagamentoService {
     @Autowired
     private ModelMapper modelMapper;
 
-
+    @Autowired
+    private PedidoClients pedidoClients;
 
     public Page<PagamentoDto> obterTodos(Pageable paginacao) {
         return pagamentoRepository.findAll(paginacao).map(p -> modelMapper.map(p, PagamentoDto.class));
@@ -66,16 +62,15 @@ public class PagamentoService {
     }
 
     public void confirmaPagamento(Long id){
-
         Optional<Pagamento> pagamento = pagamentoRepository.findById(id);
 
-        if(!pagamento.isPresent()){
-           throw new EntityNotFoundException();
+        if (!pagamento.isPresent()){
+            throw new EntityNotFoundException("Pagamento não encontrado");
         }
 
         pagamento.get().setStatus(Status.CONFIRMADO);
         pagamentoRepository.save(pagamento.get());
-        pedidoClient.atualizaPagamento(pagamento.get().getId());
+        pedidoClients.atualizaPagamento(pagamento.get().getPedidoId());
     }
 
     private Pagamento atualizaDados(Pagamento dados, Optional<Pagamento> retornoBanco) {
