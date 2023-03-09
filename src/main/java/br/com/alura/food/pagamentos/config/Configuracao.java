@@ -1,6 +1,7 @@
 package br.com.alura.food.pagamentos.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
