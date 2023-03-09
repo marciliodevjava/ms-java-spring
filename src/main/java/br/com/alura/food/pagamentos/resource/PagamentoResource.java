@@ -1,6 +1,7 @@
 package br.com.alura.food.pagamentos.resource;
 
 import br.com.alura.food.pagamentos.dto.PagamentoDto;
+import br.com.alura.food.pagamentos.dto.PagamentoIdDto;
 import br.com.alura.food.pagamentos.service.PagamentoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -58,5 +60,10 @@ public class PagamentoResource {
     @GetMapping("/port")
     public String retornaPort(@Value("${local.server.port}")String port){
         return String.format("Requisição respondida pela instancia na porta %s", port);
+    }
+
+    @PutMapping("{id}/pagamento")
+    public void confirmaPagamento(@PathVariable Long id){
+        pagamentoService.confirmaPagamento(id);
     }
 }
