@@ -5,12 +5,13 @@ import br.com.alura.food.pagamentos.domain.enuns.Status;
 import br.com.alura.food.pagamentos.dto.PagamentoDto;
 import br.com.alura.food.pagamentos.http.PedidoClients;
 import br.com.alura.food.pagamentos.repository.PagamentoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@ImportAutoConfiguration({FeignAutoConfiguration.class, HttpClientConfiguration.class})
+@ImportAutoConfiguration({FeignAutoConfiguration.class})
 public class PagamentosApplication {
 
     public static void main(String[] args) {
