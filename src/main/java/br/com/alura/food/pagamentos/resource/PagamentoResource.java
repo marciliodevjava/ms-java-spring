@@ -59,7 +59,7 @@ public class PagamentoResource {
         return String.format("Requisição respondida pela instancia na porta %s", port);
     }
 
-    @PutMapping("/{id}/confirmar")
+   @PatchMapping("/{id}/confirmar")
     public void confirmaPagamento(@PathVariable Long id){
         pagamentoService.confirmaPagamento(id);
     }
