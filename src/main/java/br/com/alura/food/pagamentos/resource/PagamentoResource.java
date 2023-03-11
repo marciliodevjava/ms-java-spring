@@ -61,8 +61,12 @@ public class PagamentoResource {
     }
 
    @PatchMapping("/{id}/confirmar")
-   @CircuitBreaker(name = "atualizaPedido", fallbackMethod = "")
+   @CircuitBreaker(name = "atualizaPedido", fallbackMethod = "pagamentoAutorizadoSemIntegracao")
     public void confirmaPagamento(@PathVariable Long id){
         pagamentoService.confirmaPagamento(id);
+    }
+
+    public void pagamentoAutorizadoSemIntegracao(@PathVariable Long id, Exception ex){
+        pagamentoService.alteraStatus(id);
     }
 }
