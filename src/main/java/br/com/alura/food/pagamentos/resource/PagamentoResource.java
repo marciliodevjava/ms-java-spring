@@ -2,6 +2,7 @@ package br.com.alura.food.pagamentos.resource;
 
 import br.com.alura.food.pagamentos.dto.PagamentoDto;
 import br.com.alura.food.pagamentos.service.PagamentoService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -60,6 +61,7 @@ public class PagamentoResource {
     }
 
    @PatchMapping("/{id}/confirmar")
+   @CircuitBreaker(name = "atualizaPedido", fallbackMethod = "")
     public void confirmaPagamento(@PathVariable Long id){
         pagamentoService.confirmaPagamento(id);
     }
